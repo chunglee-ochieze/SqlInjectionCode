@@ -25,6 +25,16 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
 
+###### CODEQL SCANNER START
+
+    - name: CodeQL Bundle
+      uses: advanced-security/codeql-bundle-action@v1.1.0
+      #with:
+        # A comma-separated list of CodeQL packs to include in the bundle
+      #  packs: ''
+          
+###### CODEQL SCANNER END
+
 ###### TRIVY CODE SCANNER START
 
     #- name: Aqua Security Trivy
@@ -34,15 +44,12 @@ jobs:
     #  uses: github/codeql-action/upload-sarif@v3
     #  with:
     #    sarif_file: trivy-results1.sarif
-    - name: Aqua Build Security
-  # You may pin to the exact commit or the version.
-  # uses: aquasecurity/build-security-action@d888ad3abadb4bbca1fcff8d83c416c502e39b1a
-      uses: aquasecurity/build-security-action@v0.0.1
-      with:
-        # Your AQUA_KEY provided by CSPM
-        aqua_key: ''
-        # Your AQUA_SECRET provided by CSPM
-        aqua_secret: ''
+    #- name: Aqua Build Security
+  
+    #  uses: aquasecurity/build-security-action@v0.0.1
+    #  with:
+    #    aqua_key: ''
+    #    aqua_secret: ''
         
 ###### TRIVY CODE SCANNER END
     
