@@ -27,17 +27,23 @@ jobs:
 
 ###### TRIVY CODE SCANNER START
 
-    - name: Aqua Security Trivy
-      #uses: aquasecurity/trivy-action@0.28.0
-      run: |
-        trivy image --download-db-only
-        trivy fs -d --format sarif --output  trivy-results1.sarif .
+    #- name: Aqua Security Trivy
+    #  uses: aquasecurity/trivy-action@0.28.0
       
-    - name: Upload Trivy Scan Result
-      uses: github/codeql-action/upload-sarif@v3
+    #- name: Upload Trivy Scan Result
+    #  uses: github/codeql-action/upload-sarif@v3
+    #  with:
+    #    sarif_file: trivy-results1.sarif
+    - name: Aqua Build Security
+  # You may pin to the exact commit or the version.
+  # uses: aquasecurity/build-security-action@d888ad3abadb4bbca1fcff8d83c416c502e39b1a
+      uses: aquasecurity/build-security-action@v0.0.1
       with:
-        sarif_file: trivy-results1.sarif
-
+        # Your AQUA_KEY provided by CSPM
+        aqua_key: ''
+        # Your AQUA_SECRET provided by CSPM
+        aqua_secret: ''
+        
 ###### TRIVY CODE SCANNER END
     
     - name: Test
