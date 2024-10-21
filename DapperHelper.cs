@@ -13,7 +13,7 @@ public interface IDapperHelper : IDisposable
 
 public class DapperHelper : IDapperHelper
 {
-    public DbConnection DbConnection() => new SqlConnection("Server=localhost;Database=TestDb;Trusted_Connection=True;");
+    public DbConnection DbConnection() => new SqlConnection("Server=localhost;Database=TestDb;UserId=whatever;Password=whatever;Trusted_Connection=True;");
 
     public void Dispose()
     {
