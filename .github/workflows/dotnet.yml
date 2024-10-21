@@ -27,8 +27,8 @@ jobs:
 
 ###### CODEQL SCANNER START
 
-    - name: CodeQL Bundle
-      uses: advanced-security/codeql-bundle-action@v1.1.0
+    #- name: CodeQL Bundle
+    #  uses: advanced-security/codeql-bundle-action@v1.1.0
       #with:
         # A comma-separated list of CodeQL packs to include in the bundle
       #  packs: ''
@@ -37,19 +37,19 @@ jobs:
 
 ###### TRIVY CODE SCANNER START
 
-    #- name: Aqua Security Trivy
-    #  uses: aquasecurity/trivy-action@0.28.0
-      
-    #- name: Upload Trivy Scan Result
-    #  uses: github/codeql-action/upload-sarif@v3
-    #  with:
-    #    sarif_file: trivy-results1.sarif
-    #- name: Aqua Build Security
-  
-    #  uses: aquasecurity/build-security-action@v0.0.1
-    #  with:
-    #    aqua_key: ''
-    #    aqua_secret: ''
+    - name: Aqua Security Trivy
+      uses: aquasecurity/trivy-action@0.28.0
+      with:
+        scan-type: 'fs'
+        ignore-unfixed: false
+        format: 'sarif'
+        output: 'trivy-results.sarif'
+        severity: 'CRITICAL'
+
+    - name: Upload Trivy scan results to GitHub Security tab
+      uses: github/codeql-action/upload-sarif@v3
+      with:
+        sarif_file: 'trivy-results.sarif'
         
 ###### TRIVY CODE SCANNER END
     
