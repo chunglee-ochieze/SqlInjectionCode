@@ -27,11 +27,10 @@ jobs:
 
 ###### CODEQL SCANNER START
 
-    #- name: CodeQL Bundle
-    #  uses: advanced-security/codeql-bundle-action@v1.1.0
-      #with:
-        # A comma-separated list of CodeQL packs to include in the bundle
-      #  packs: ''
+    - name: Initialize CodeQL
+      uses: github/codeql-action/init@v3
+      with:
+        languages: 'csharp'
           
 ###### CODEQL SCANNER END
 
@@ -44,7 +43,8 @@ jobs:
         ignore-unfixed: false
         format: 'sarif'
         output: 'trivy-results.sarif'
-        severity: 'CRITICAL'
+        severity: 'CRITICAL,HIGH,MEDIUM,LOW,UNKNOWN'
+        exit-code: 1
 
     - name: Upload Trivy scan results to GitHub Security tab
       uses: github/codeql-action/upload-sarif@v3
